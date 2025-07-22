@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Screener</title>
+</head>
+<body>
+    <h1>Stock Screener</h1>
+    <button id="run-btn">Run Screener</button>
+    <ul id="results"></ul>
+    <script>
+        document.getElementById('run-btn').onclick = function() {
+            // Clear previous results
+            document.getElementById('results').innerHTML = 'Running...';
+            fetch('/run_screener', {method: 'POST'})
+                .then(response => response.json())
+                .then(data => {
+                    const ul = document.getElementById('results');
+                    ul.innerHTML = '';
+                    if (data.length === 0) {
+                        ul.innerHTML = '<li>No contracts found touching Supertrend.</li>';
+                    } else {
+                        data.forEach(stock => {
+                            const li = document.createElement('li');
+                            li.textContent = stock;
+                            ul.appendChild(li);
+                        });
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
