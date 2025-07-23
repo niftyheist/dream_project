@@ -14,7 +14,7 @@ ACCESS_TOKEN = load_access_token()
 #print("Access token loaded successfully!")
 
 # Load the CSV
-df = pd.read_csv("test-data.csv")
+df = pd.read_csv("api-scrip-master-detailed.csv")
 
 # Filter for NSE stock futures
 futures_df = df[
