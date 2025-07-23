@@ -14,7 +14,7 @@ ACCESS_TOKEN = load_access_token()
 #print("Access token loaded successfully!")
 
 # Load the CSV
-df = pd.read_csv("api-scrip-master-detailed.csv")
+df = pd.read_csv("test-data.csv")
 
 # Filter for NSE stock futures
 futures_df = df[
@@ -67,6 +67,7 @@ def fetch_daily_ohlcv(security_id, exchange_segment, instrument, access_token, f
         return None
 
 def fetch_intraday_ohlcv(security_id, exchange_segment, instrument, access_token, from_date, to_date, interval="60"):
+    print("Fetching intraday data for", security_id, exchange_segment, instrument, from_date, to_date, interval)
     url = "https://api.dhan.co/v2/charts/intraday"
     headers = {
         "Content-Type": "application/json",
@@ -80,6 +81,7 @@ def fetch_intraday_ohlcv(security_id, exchange_segment, instrument, access_token
         "toDate": "2025-07-22 13:00:00",
         "interval": interval
     }
+    print("Body:", body)
     response = requests.post(url, headers=headers, json=body)
     # Print the response details
     print("Status Code:", response.status_code)
